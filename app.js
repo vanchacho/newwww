@@ -443,12 +443,12 @@
   if (yes1) yes1.addEventListener("click", function () { burstFrom(this, 14); step2(); });
 
   var ANS = {
-    a: { t: "ეჭვი არ მქონდა",
-      x: "ვიცოდი, რომ იცოდი. უბრალოდ მინდოდა, სადმე დაწერილი ყოფილიყო — და აი, წერია." },
-    b: { t: "ეჭვი მოხსნილია",
-      x: "ოფიციალურად, წერილობით და საეჭვოდ ბევრი ანიმაციით დადასტურებული." },
-    c: { t: "მაშინ გვერდმა თავისი საქმე გააკეთა",
-      x: "დანარჩენი ჩემზეა. და დანარჩენი დიდი ხანია დაწყებულია." }
+    a: { t: "საქმე დახურულია",
+      x: "ეგრე ვიფიქრე. ბრალდებული სრულად აღიარებს და მოწმეც თვითონვეა." },
+    b: { t: "ეჭვი გამართლდა",
+      x: "სწორად ეჭვობდი. მთელი ეს გვერდი ნივთმტკიცებაა და სულ ერთ სახელს ამბობს." },
+    c: { t: "ზუსტად",
+      x: "სწორედ მას ვეძებდი. და, გულახდილად, დიდი ხანია ვიპოვე." }
   };
   $$("[data-ans]").forEach(function (b) {
     b.addEventListener("click", function () {
@@ -509,23 +509,49 @@
   /* ══════════ კონვერტი ══════════ */
   var env = $("#env"), envwrap = $("#envwrap");
   var paper = $("#letterPaper"), letterBtn = $("#letterBtn");
-  var letterOpen = false;
+  var letterClose = $("#letterClose");
+  var letterOpen = false, letterBusy = false;
 
   function openLetter() {
-    if (letterOpen || !env) return;
-    letterOpen = true;
+    if (letterOpen || letterBusy || !env) return;
+    letterOpen = true; letterBusy = true;
     env.classList.add("is-open");
     burstFrom(env, 18);
     var wait = calm ? 0 : 660;
     setTimeout(function () {
       envwrap.classList.add("is-gone");
       paper.hidden = false;
+      paper.classList.remove("is-back");
       paper.classList.add("is-out");
     }, wait);
-    setTimeout(function () { envwrap.style.display = "none"; }, wait + 720);
+    setTimeout(function () {
+      envwrap.style.display = "none";
+      letterBusy = false;
+    }, wait + 760);
   }
+
+  function closeLetter() {
+    if (!letterOpen || letterBusy) return;
+    letterOpen = false; letterBusy = true;
+    paper.classList.remove("is-out");
+    paper.classList.add("is-back");
+    var wait = calm ? 0 : 560;
+    setTimeout(function () {
+      paper.hidden = true;
+      paper.classList.remove("is-back");
+      envwrap.style.display = "";
+      void envwrap.offsetWidth;                /* reflow, რომ გადასვლა დაიჭიროს */
+      envwrap.classList.remove("is-gone");
+      setTimeout(function () {
+        env.classList.remove("is-open");       /* ფარვალი ისევ იხურება */
+        letterBusy = false;
+      }, calm ? 0 : 300);
+    }, wait);
+  }
+
   if (letterBtn) letterBtn.addEventListener("click", openLetter);
   if (env) env.addEventListener("click", openLetter);
+  if (letterClose) letterClose.addEventListener("click", closeLetter);
 
   /* ══════════ ფინალი ══════════ */
   var endHeart = $("#endHeart"), endMsg = $("#endMsg"), taps = 0;
