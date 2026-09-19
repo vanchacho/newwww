@@ -450,7 +450,8 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   font-family:var(--serif);font-weight:400;
   font-size:clamp(1.35rem,4vw,2.1rem);line-height:1.34;margin:0 0 30px;
 }
-.ask__card h2 em{font-style:normal;color:var(--rose);white-space:nowrap}
+.ask__card h2{overflow-wrap:break-word}
+.ask__card h2 em{font-style:normal;color:var(--rose)}
 .ask__card p{color:var(--ink-soft);margin:0 0 24px;font-size:1.02rem;line-height:1.7}
 .ask__btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
 .ask__btns--three{gap:10px}
@@ -796,6 +797,9 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   .marquee__row img{height:132px;width:104px}
   .marquee__row figure{width:104px}
   .diptych__pics{grid-template-columns:1fr}
+  /* სამი პასუხი 2+1-ად ეშლებოდა — ახლა სამი სუფთა რიგია */
+  .ask__btns--three{flex-direction:column;align-items:stretch;gap:12px}
+  .ask__btns--three .btn{width:100%}
   .player{flex-direction:column;text-align:center}
   .viz{justify-content:center}
   .topbar__mark{display:none}
