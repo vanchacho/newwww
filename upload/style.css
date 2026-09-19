@@ -468,10 +468,18 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
 
 .env{
   position:relative;width:min(430px,86vw);aspect-ratio:1.6;
-  perspective:1000px;cursor:pointer;
-  transition:transform .6s cubic-bezier(.34,1.56,.64,1);
+  perspective:1000px;cursor:pointer;outline:none;
+  animation:envFloat 5s ease-in-out infinite;
 }
-.env:hover{transform:translateY(-7px) rotate(-.7deg)}
+.env__body,.env__flap,.env__note{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s}
+/* გადატარებაზე ფარვალი ოდნავ იწევს — მიწვევა, რომ დააჭირო */
+.env:hover .env__body,.env:focus-visible .env__body{
+  transform:scale(1.015);
+  box-shadow:0 38px 80px -34px rgba(94,45,60,.55),inset 0 1px 0 rgba(255,255,255,.55);
+}
+.env:hover .env__flap,.env:focus-visible .env__flap{transform:rotateX(-16deg)}
+.env:focus-visible .env__body{border-color:var(--rose)}
+.env:active .env__body{transform:scale(.99)}
 .env__body{
   position:absolute;inset:0;border-radius:12px;overflow:hidden;
   background:linear-gradient(158deg,var(--card),var(--bg-2));
@@ -514,17 +522,6 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   transition:opacity .45s,transform .5s;
 }
 .env.is-open .env__seal{animation:none;opacity:0;transform:translate(-50%,-50%) scale(.35)}
-.env__btn{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--sans);font-size:1rem;font-weight:400;
-  padding:14px 32px;border-radius:999px;cursor:pointer;border:none;color:#fff;
-  background:linear-gradient(120deg,var(--rose),var(--rose-deep));
-  box-shadow:0 14px 32px -12px rgba(184,81,95,.8);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;
-}
-.env__btn:hover{transform:translateY(-3px) scale(1.04)}
-.env__btn:active{transform:scale(.97)}
-
 .letter__paper[hidden]{display:none}
 .letter__paper.is-out{animation:letterOut 1.05s cubic-bezier(.22,1,.36,1)}
 .letter__paper.is-back{animation:letterBack .6s cubic-bezier(.4,0,1,1) forwards}
@@ -692,6 +689,10 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   100%{opacity:0;transform:translate(var(--dx,20px),-112vh) rotate(var(--rot,220deg)) scale(1.1)}
 }
 @keyframes blink{50%{opacity:0}}
+@keyframes envFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
 @keyframes sealBeat{
   0%,100%{transform:translate(-50%,-50%) scale(1)}
   14%{transform:translate(-50%,-50%) scale(1.15)}

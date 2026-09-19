@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ქეთასთვის ❤</title>
 <meta name="description" content="ერთი პატარა გვერდი, რომელიც მხოლოდ ერთი ადამიანისთვის დამზადდა.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 30'%3E%3Cpath d='M16 27C16 27 3 18.5 3 10.8 3 6.5 6.4 3 10.6 3 13.2 3 15.2 4.4 16 6.2 16.8 4.4 18.8 3 21.4 3 25.6 3 29 6.5 29 10.8 29 18.5 16 27 16 27Z' fill='%23D9737F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -237,13 +237,12 @@
 <!-- ══════════════ წერილი ══════════════ -->
 <section class="letter" id="letter">
   <div class="envwrap reveal" id="envwrap">
-    <div class="env" id="env">
+    <div class="env" id="env" role="button" tabindex="0" aria-label="წერილის გახსნა">
       <div class="env__body"></div>
-      <div class="env__note">ერთი წერილი გელოდება</div>
+      <div class="env__note">ერთი წერილი გელოდება · დააჭირე</div>
       <div class="env__flap"></div>
       <div class="env__seal">❤</div>
     </div>
-    <button class="env__btn" id="letterBtn" type="button">გახსენი წერილი</button>
   </div>
 
   <div class="letter__paper" id="letterPaper" hidden>
@@ -290,6 +289,6 @@
 <audio id="audio" loop preload="auto" src="music/technomagia.mp3"></audio>
 <div id="ytHost" class="yt-host" aria-hidden="true"></div>
 
-<script src="app.js?v=5"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>

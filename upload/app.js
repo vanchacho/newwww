@@ -508,8 +508,7 @@
 
   /* ══════════ კონვერტი ══════════ */
   var env = $("#env"), envwrap = $("#envwrap");
-  var paper = $("#letterPaper"), letterBtn = $("#letterBtn");
-  var letterClose = $("#letterClose");
+  var paper = $("#letterPaper"), letterClose = $("#letterClose");
   var letterOpen = false, letterBusy = false;
 
   function openLetter() {
@@ -549,8 +548,12 @@
     }, wait);
   }
 
-  if (letterBtn) letterBtn.addEventListener("click", openLetter);
-  if (env) env.addEventListener("click", openLetter);
+  if (env) {
+    env.addEventListener("click", openLetter);
+    env.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLetter(); }
+    });
+  }
   if (letterClose) letterClose.addEventListener("click", closeLetter);
 
   /* ══════════ ფინალი ══════════ */
