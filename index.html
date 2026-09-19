@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ka" data-theme="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ქეთასთვის ❤</title>
+<meta name="description" content="ერთი პატარა გვერდი, რომელიც მხოლოდ ერთი ადამიანისთვის დამზადდა.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@300;400;500;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+
+<!-- ══════════════ კარიბჭე ══════════════ -->
+<div class="gate" id="gate">
+  <div class="gate__glow"></div>
+  <div class="gate__inner">
+    <p class="gate__eyebrow">ერთი პატარა გვერდი</p>
+    <h1 class="gate__title">ქეთასთვის</h1>
+    <p class="gate__sub">სანამ გახსნი — ხმა აუწიე</p>
+    <button class="gate__btn" id="gateBtn" type="button">
+      <span class="gate__heart">❤</span>
+      <span>გახსენი</span>
+    </button>
+    <p class="gate__hint">(სულ 40 წამი, გპირდები)</p>
+  </div>
+</div>
+
+<!-- ══════════════ ფიქსირებული ინტერფეისი ══════════════ -->
+<div class="progress" id="progress"></div>
+
+<header class="topbar">
+  <span class="topbar__mark">ქ &amp; მ<span class="topbar__dot">·</span><span class="topbar__year">2026</span></span>
+  <div class="topbar__tools">
+    <button class="pill" id="musicBtn" type="button" aria-label="მუსიკა">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="pill__txt" id="musicTxt">ტექნომაგია</span>
+    </button>
+    <button class="pill pill--icon" id="themeBtn" type="button" aria-label="ღამის რეჟიმი">
+      <span id="themeIco">☾</span>
+    </button>
+  </div>
+</header>
+
+<!-- ══════════════ ჰერო ══════════════ -->
+<main>
+<section class="hero" id="hero">
+  <div class="blobs" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+  </div>
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
+
+  <div class="hero__cards" id="heroCards" aria-hidden="true">
+    <figure class="hcard hcard--a" data-depth="18"><img src="img/03-sky.jpg" alt=""></figure>
+    <figure class="hcard hcard--b" data-depth="-26"><img src="img/01-barcelona.jpg" alt=""></figure>
+    <figure class="hcard hcard--c" data-depth="30"><img src="img/08-winter.jpg" alt=""></figure>
+  </div>
+
+  <div class="hero__mid">
+    <p class="eyebrow reveal">ეს გვერდი ეკუთვნის</p>
+    <h1 class="hero__name" id="heroName" aria-label="ქეთა">ქეთა</h1>
+    <p class="hero__type"><span id="typed"></span><span class="caret">|</span></p>
+    <a class="hero__cue" href="#quote">
+      <span>ჩამოსქროლე</span>
+      <span class="hero__arrow">↓</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════ ციტატა ══════════════ -->
+<section class="quote" id="quote">
+  <p class="quote__small reveal">ერთი ჭეშმარიტება, უბრალოდ რომ დაფიქსირდეს</p>
+  <blockquote class="quote__big reveal" data-split>
+    ლამაზი ხარ. მაგრამ ყველაზე ლამაზი მაშინ ხარ, როცა არ იცი, რომ გიყურებ.
+  </blockquote>
+  <p class="quote__sign reveal">— შემოწმებულია. არაერთხელ.</p>
+</section>
+
+<!-- ══════════════ მარკიზა ══════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__row" id="marqueeRow"></div>
+</div>
+
+<!-- ══════════════ გალერეა ══════════════ -->
+<section class="gallery" id="gallery">
+  <article class="shot reveal">
+    <figure class="shot__img" data-zoom>
+      <img src="img/02-night.jpg" alt="ქეთა ღამის თბილისის ფონზე" loading="lazy">
+    </figure>
+    <div class="shot__txt">
+      <span class="shot__no">01</span>
+      <h3>ღამის თბილისი ორ ნაწილად იყოფა: შენ და ფონი.</h3>
+      <p>ღამის ქალაქი, სადაც ყველა შუქი ერთი მიმართულებით იყურებოდა.</p>
+      <p class="joke">ფონმა კომპენსაცია ითხოვა: „მე აქ ვბრწყინავ და არავინ მიყურებს.“</p>
+    </div>
+  </article>
+
+  <article class="shot shot--flip reveal">
+    <figure class="shot__img" data-zoom>
+      <img src="img/04-sunset.jpg" alt="ქეთა ზღვაზე, მზის ჩასვლა" loading="lazy">
+    </figure>
+    <div class="shot__txt">
+      <span class="shot__no">02</span>
+      <h3>მზე ჩადის, რომ შენს ღიმილს ადგილი დაუთმოს.</h3>
+      <p>მზის ჩასვლა, რომელიც ყურადღების მიპყრობას ცდილობდა და მარცხი იწვნია.</p>
+      <p class="joke">მზე ჩავარდა და მერე ინტერნეტში ეძებდა: „როგორ დავბრუნდები ისე ლამაზად, როგორც ის“.</p>
+    </div>
+  </article>
+
+  <article class="shot reveal">
+    <figure class="shot__img" data-zoom>
+      <img src="img/05-mountains.jpg" alt="ქეთა მთებში, ძველი მანქანასთან" loading="lazy">
+    </figure>
+    <div class="shot__txt">
+      <span class="shot__no">03</span>
+      <h3>მთებმა თქვეს: „ჩვენ დიდები ვართ“. მერე შენ გამოჩნდი და გაჩუმდნენ.</h3>
+      <p>მთა, ძველი მანქანა და ერთი ადამიანი, რომელმაც ორივეს დეკორაციის სტატუსი მისცა.</p>
+      <p class="joke">ეს მანქანა ორმოცი წელი იდგა უძრავად. ერთი ფოტო და ახლა ჰგონია, ფოტომოდელია.</p>
+    </div>
+  </article>
+
+  <article class="shot shot--flip reveal">
+    <figure class="shot__img" data-zoom>
+      <img src="img/01-barcelona.jpg" alt="ქეთა ბარსელონაში, პალმების ფონზე" loading="lazy">
+    </figure>
+    <div class="shot__txt">
+      <span class="shot__no">04</span>
+      <h3>ბარსელონამ იფიქრა, გაუმართლა. სრულიად მართალი იყო.</h3>
+      <p>ბარსელონა, სადაც ტურისტები ღირსშესანიშნაობებს უღებდნენ ფოტოს — ერთის გარდა.</p>
+      <p class="joke">ქურთუკი ლამაზია. მაგრამ არა შენზე ლამაზი. (ბოდიში, ქურთუკო, არაფერი პირადი.)</p>
+    </div>
+  </article>
+
+  <article class="shot reveal">
+    <figure class="shot__img" data-zoom>
+      <img src="img/08-winter.jpg" alt="ქეთა ზამთარში, გაყინული ტბის პირას" loading="lazy">
+    </figure>
+    <div class="shot__txt">
+      <span class="shot__no">05</span>
+      <h3>მინუს თხუთმეტი — და მაინც შენ ხარ აქ ყველაზე თბილი.</h3>
+      <p>გაყინული ტბა, სადაც ერთადერთი გამათბობელი კადრში მოხვდა.</p>
+      <p class="joke">მეცნიერებმა ვერ ახსნეს, რატომ დნება ყინული შენს ღიმილზე. მე ვიცი, მაგრამ არ ვამბობ — მიეცით გრანტი.</p>
+    </div>
+  </article>
+
+  <!-- დიპტიქი: მუზეუმი -->
+  <article class="diptych reveal">
+    <div class="diptych__pics">
+      <figure data-zoom><img src="img/06-museum-a.jpg" alt="ქეთა მუზეუმში, „კივილის“ გვერდით" loading="lazy"></figure>
+      <figure data-zoom><img src="img/07-museum-b.jpg" alt="ქეთა მუზეუმში იცინის" loading="lazy"></figure>
+    </div>
+    <div class="diptych__txt">
+      <span class="shot__no">06 &amp; 07</span>
+      <h3 class="diptych__big">ხელოვნების მუზეუმი, სადაც ყველაზე ლამაზი ექსპონატი ბილეთით შემოვიდა.</h3>
+      <p>მუნკმა „კივილი“ დახატა. მე მგონი, ვიცი რატომ.</p>
+    </div>
+  </article>
+
+  <article class="shot shot--wide reveal">
+    <figure class="shot__img" data-zoom>
+      <img src="img/03-sky.jpg" alt="ქეთა ცის ფონზე იღიმება" loading="lazy">
+    </figure>
+    <div class="shot__txt">
+      <span class="shot__no">08</span>
+      <h3>ცა ცისფერია. მაგრამ ვინმემ ხომ უნდა უთხრას, რომ მეორე ადგილია.</h3>
+      <p>ცისფერი ცა, რომელიც ფონად დარჩენას დათანხმდა — სხვა არჩევანი არ ჰქონდა.</p>
+      <p class="joke">ამ ფოტოს გამო მეტეოროლოგებმა ახალი ტერმინი შემოიღეს — „ქეთიანი ამინდი“.</p>
+    </div>
+  </article>
+</section>
+
+<!-- ══════════════ ფაქტები ══════════════ -->
+<section class="facts" id="facts">
+  <p class="section__label reveal">მეცნიერულად დადასტურებული</p>
+  <h2 class="section__title reveal" data-split>ფაქტები ქეთაზე</h2>
+  <div class="facts__grid">
+    <div class="fact reveal">
+      <strong class="fact__num" data-to="47300">0</strong>
+      <span class="fact__unit">-ჯერ დღეში</span>
+      <p class="fact__key">შენზე ფიქრის სიხშირე</p>
+      <p class="fact__note">სტატისტიკა ღამის ცვლის გარეშე.</p>
+    </div>
+    <div class="fact reveal">
+      <strong class="fact__num" data-to="187">0</strong>
+      <span class="fact__unit">დარტყმა / წთ</span>
+      <p class="fact__key">გულისცემა, როცა შემოდიხარ</p>
+      <p class="fact__note">ექიმმა თქვა: „ნორმაა, შეყვარებულია“.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ საზომი ══════════════ -->
+<section class="meter" id="meter">
+  <p class="section__label reveal">ინტერაქტიული ნაწილი</p>
+  <h2 class="section__title reveal" data-split>სიყვარულის საზომი</h2>
+  <div class="meter__box reveal">
+    <div class="meter__val" id="meterVal">∞</div>
+    <input class="meter__range" id="meterRange" type="range" min="0" max="100" value="100" aria-label="სიყვარულის საზომი">
+    <p class="meter__msg" id="meterMsg">აი, ეს არის სიმართლე</p>
+  </div>
+</section>
+
+<!-- ══════════════ კითხვები ══════════════ -->
+<section class="ask" id="ask">
+  <div class="ask__card reveal">
+    <div class="ask__step" id="q1">
+      <h2>გაფრთხილება: ამის შემდეგ ვერ იტყვი, რომ არ იცოდი. <em>მზად ხარ?</em></h2>
+      <div class="ask__btns">
+        <button class="btn btn--yes" id="yes1" type="button">მზად ვარ</button>
+        <button class="btn btn--no" id="no1" type="button">არა</button>
+      </div>
+      <p class="ask__hint" id="hint1">(ერთ ღილაკს პრობლემები აქვს)</p>
+    </div>
+
+    <div class="ask__step ask__step--hidden" id="q2">
+      <h2>ეს გვერდი, ეს სიმღერა და ეს რვა ფოტო — სამივე ერთი ადამიანისთვისაა. <em>ახლა უკვე იცი, ვინ?</em></h2>
+      <div class="ask__btns ask__btns--three">
+        <button class="btn btn--soft" data-ans="a" type="button">ვიცოდი</button>
+        <button class="btn btn--soft" data-ans="b" type="button">ეჭვი მქონდა</button>
+        <button class="btn btn--soft" data-ans="c" type="button">ახლა ვიცი</button>
+      </div>
+    </div>
+
+    <div class="ask__step ask__step--hidden" id="q3">
+      <h2 id="ansTitle"></h2>
+      <p id="ansText"></p>
+      <button class="btn btn--ghost" id="again" type="button">კიდე ვიკითხო ↺</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ წერილი ══════════════ -->
+<section class="letter" id="letter">
+  <div class="letter__paper reveal">
+    <p class="letter__to">ქეთა,</p>
+    <p>არ ვიცი, როგორ იწყება ასეთი წერილები. ალბათ უხერხულად — და ეს ნორმალურია.</p>
+    <p>უბრალოდ მინდოდა, სადმე დამეწერა, რომ შენ გამო ჩვეულებრივი დღეები ჩვეულებრივი აღარ არის. ყველაზე რიგითი საღამო, სადაც შენ ხარ, უკეთესია ყველაზე კარგ საღამოზე, სადაც არ ხარ.</p>
+    <p>მე გვერდების გაკეთება მასე არ მჩვევია. მაგრამ ვიფიქრე — ყვავილი გაჭკნება, შოკოლადი შეიჭმება, ხოლო ეს აქ დარჩება. და ყოველთვის შეგიძლია გახსნა, როცა დაგავიწყდება, რამდენად საყვარელი ხარ.</p>
+    <p class="letter__big">მიყვარხარ. უბრალოდ, უპირობოდ, ყოველდღე.</p>
+    <p class="letter__sign">— შენი <span class="letter__hb">❤</span></p>
+  </div>
+</section>
+
+<!-- ══════════════ სიმღერა ══════════════ -->
+<section class="song" id="song">
+  <div class="player reveal">
+    <button class="player__play" id="playBig" type="button" aria-label="დაკვრა">
+      <span id="playIco">▶</span>
+    </button>
+    <div class="player__meta">
+      <p class="player__name">ტექნომაგია</p>
+      <p class="player__artist">Undersky</p>
+      <div class="viz" id="viz" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ფინალი ══════════════ -->
+<footer class="end" id="end">
+  <div class="end__heart" id="endHeart">❤</div>
+  <p class="end__msg" id="endMsg">დააჭირე გულს</p>
+  <p class="end__txt">დამზადებულია დიდი სიყვარულით</p>
+  <button class="btn btn--ghost" id="toTop" type="button">თავიდან ↑</button>
+  <p class="end__tiny">ქეთასთვის · 2026</p>
+</footer>
+</main>
+
+<!-- ══════════════ ლაითბოქსი ══════════════ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="ფოტო">
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox__x" id="lightboxX" type="button" aria-label="დახურვა">×</button>
+</div>
+
+<audio id="audio" loop preload="auto" src="music/technomagia.mp3"></audio>
+<div id="ytHost" class="yt-host" aria-hidden="true"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
