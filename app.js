@@ -506,6 +506,27 @@
     burstFrom(this, 7);
   });
 
+  /* ══════════ კონვერტი ══════════ */
+  var env = $("#env"), envwrap = $("#envwrap");
+  var paper = $("#letterPaper"), letterBtn = $("#letterBtn");
+  var letterOpen = false;
+
+  function openLetter() {
+    if (letterOpen || !env) return;
+    letterOpen = true;
+    env.classList.add("is-open");
+    burstFrom(env, 18);
+    var wait = calm ? 0 : 660;
+    setTimeout(function () {
+      envwrap.classList.add("is-gone");
+      paper.hidden = false;
+      paper.classList.add("is-out");
+    }, wait);
+    setTimeout(function () { envwrap.style.display = "none"; }, wait + 720);
+  }
+  if (letterBtn) letterBtn.addEventListener("click", openLetter);
+  if (env) env.addEventListener("click", openLetter);
+
   /* ══════════ ფინალი ══════════ */
   var endHeart = $("#endHeart"), endMsg = $("#endMsg"), taps = 0;
   var TAPS = [

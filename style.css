@@ -458,8 +458,68 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
 .btn--ghost:hover{background:var(--rose);color:#fff;transform:translateY(-2px)}
 .btn--runaway{position:relative;transition:transform .45s cubic-bezier(.34,1.56,.64,1),opacity .4s}
 
-/* ─────────────  წერილი  ───────────── */
+/* ─────────────  წერილი: კონვერტი  ───────────── */
 .letter{display:grid;place-items:center}
+.envwrap{
+  display:grid;place-items:center;gap:clamp(22px,3.5vw,34px);
+  transition:opacity .65s ease,transform .65s cubic-bezier(.4,0,1,1);
+}
+.envwrap.is-gone{opacity:0;transform:scale(.8) translateY(-16px);pointer-events:none}
+
+.env{
+  position:relative;width:min(430px,86vw);aspect-ratio:1.6;
+  perspective:1000px;cursor:pointer;
+  transition:transform .6s cubic-bezier(.34,1.56,.64,1);
+}
+.env:hover{transform:translateY(-7px) rotate(-.7deg)}
+.env__body{
+  position:absolute;inset:0;border-radius:12px;overflow:hidden;
+  background:linear-gradient(158deg,var(--card),var(--bg-2));
+  border:1px solid var(--line);box-shadow:var(--shadow);
+}
+.env__body::before,.env__body::after{
+  content:"";position:absolute;inset:0;
+  border-top:1px solid var(--line);opacity:.45;
+}
+.env__body::before{clip-path:polygon(0 0,50% 62%,0 100%)}
+.env__body::after{clip-path:polygon(100% 0,50% 62%,100% 100%)}
+.env__note{
+  position:absolute;left:0;right:0;bottom:13%;z-index:2;text-align:center;
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink-soft);transition:opacity .5s;
+}
+.env.is-open .env__note{opacity:0}
+.env__flap{
+  position:absolute;left:0;right:0;top:0;height:64%;z-index:3;
+  background:linear-gradient(172deg,var(--rose-lt),var(--bg-2));
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;
+  transition:transform .85s cubic-bezier(.65,0,.35,1),filter .85s;
+}
+.env.is-open .env__flap{transform:rotateX(-170deg);filter:brightness(.96)}
+.env__seal{
+  position:absolute;left:50%;top:57%;z-index:4;
+  width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;color:#fff;font-size:1.05rem;
+  background:linear-gradient(140deg,var(--rose),var(--rose-deep));
+  box-shadow:0 10px 22px -8px rgba(184,81,95,.85);
+  animation:sealBeat 1.9s ease-in-out infinite;
+  transition:opacity .45s,transform .5s;
+}
+.env.is-open .env__seal{animation:none;opacity:0;transform:translate(-50%,-50%) scale(.35)}
+.env__btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--sans);font-size:1rem;font-weight:400;
+  padding:14px 32px;border-radius:999px;cursor:pointer;border:none;color:#fff;
+  background:linear-gradient(120deg,var(--rose),var(--rose-deep));
+  box-shadow:0 14px 32px -12px rgba(184,81,95,.8);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;
+}
+.env__btn:hover{transform:translateY(-3px) scale(1.04)}
+.env__btn:active{transform:scale(.97)}
+
+.letter__paper[hidden]{display:none}
+.letter__paper.is-out{animation:letterOut 1.05s cubic-bezier(.22,1,.36,1)}
 .letter__paper{
   position:relative;width:min(100%,700px);
   background:var(--card);border:1px solid var(--line);
@@ -538,7 +598,7 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   font-size:.92rem;color:var(--rose);margin:14px 0 0;min-height:1.6em;
   letter-spacing:.04em;
 }
-.end__msg.is-pop{animation:pop .55s cubic-bezier(.34,1.56,.64,1) both}
+.end__msg.is-pop{animation:pop .55s cubic-bezier(.34,1.56,.64,1)}
 .end__txt{font-family:var(--serif);font-size:clamp(1rem,2.4vw,1.25rem);
   line-height:1.7;margin:18px 0 32px;color:var(--ink-soft)}
 .end__txt em{font-style:normal;color:var(--rose)}
@@ -620,6 +680,18 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   100%{opacity:0;transform:translate(var(--dx,20px),-112vh) rotate(var(--rot,220deg)) scale(1.1)}
 }
 @keyframes blink{50%{opacity:0}}
+@keyframes sealBeat{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  14%{transform:translate(-50%,-50%) scale(1.15)}
+  28%{transform:translate(-50%,-50%) scale(1)}
+  42%{transform:translate(-50%,-50%) scale(1.09)}
+  56%{transform:translate(-50%,-50%) scale(1)}
+}
+@keyframes letterOut{
+  0%{opacity:0;transform:translateY(74px) scale(.9) rotate(-1.6deg);filter:blur(5px)}
+  60%{opacity:1}
+  100%{opacity:1;transform:none;filter:none}
+}
 @keyframes pop{
   0%{opacity:0;transform:translateY(10px) scale(.9)}
   60%{opacity:1;transform:translateY(0) scale(1.04)}
