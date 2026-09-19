@@ -10,6 +10,9 @@
 
   var canHover = window.matchMedia("(hover:hover)").matches;
   var calm = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var small = window.matchMedia("(max-width:760px)").matches || !canHover;
+  var moves = canHover && !calm;                 /* პარალაქსი მხოლოდ მაუსიან ეკრანზე */
+  var few = function (n) { return small ? Math.round(n * 0.5) : n; };
 
   /* ─── YouTube-ის ვიდეო, თუ ლოკალური mp3 არ არსებობს ─── */
   var YT_ID = "VJ19eCqs4cY"; /* ტექნომაგია — Undersky */
@@ -93,6 +96,22 @@
     row.appendChild(half);
   }
 
+  /* ეკრანს გარეთ ანიმაციები ჩერდება — ტელეფონს არ ეზარება */
+  function pauseWhenAway(watch, apply) {
+    if (!watch || !("IntersectionObserver" in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { apply(e.isIntersecting ? "running" : "paused"); });
+    }, { rootMargin: "140px 0px" }).observe(watch);
+  }
+  pauseWhenAway($(".marquee"), function (s) {
+    if (row) row.style.animationPlayState = s;
+  });
+  pauseWhenAway($(".hero"), function (s) {
+    $$("#floaters span, .blob").forEach(function (el) {
+      el.style.animationPlayState = s;
+    });
+  });
+
   /* ══════════ ვიზუალიზატორი ══════════ */
   var viz = $("#viz");
   if (viz) {
@@ -109,7 +128,7 @@
   function makeFloaters() {
     var host = $("#floaters");
     if (!host || calm) return;
-    for (var i = 0; i < 18; i++) {
+    for (var i = 0, n = few(18); i < n; i++) {
       var s = document.createElement("span");
       s.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
       s.style.left = rnd(2, 96).toFixed(1) + "%";
@@ -151,7 +170,7 @@
   /* ══════════ ნაწილაკები ══════════ */
   function burst(x, y, n) {
     if (calm) return;
-    for (var i = 0; i < (n || 12); i++) {
+    for (var i = 0, tot = few(n || 12); i < tot; i++) {
       var h = document.createElement("div");
       h.className = "burst";
       h.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0];
@@ -171,7 +190,7 @@
   }
   function heartRain(n) {
     if (calm) return;
-    for (var i = 0; i < (n || 34); i++) {
+    for (var i = 0, tot = few(n || 34); i < tot; i++) {
       (function (i) {
         setTimeout(function () {
           var h = document.createElement("div");
@@ -335,17 +354,18 @@
   });
   var mx = 0, my = 0;
   function applyParallax(x, y) {
+    var sy = moves ? window.scrollY * 0.06 : 0;
     cards.forEach(function (c) {
       if (c.dataset.ready !== "1") return;
       var d = parseFloat(c.getAttribute("data-depth")) || 10;
       var rot = 0;
       for (var k in ROT) if (c.classList.contains(k)) rot = ROT[k];
       c.style.transform = "translate3d(" + (x * d).toFixed(1) + "px," +
-        (y * d + window.scrollY * 0.06).toFixed(1) + "px,0) " +
+        (y * d + sy).toFixed(1) + "px,0) " +
         "rotate(" + (rot + x * 2).toFixed(2) + "deg)";
     });
   }
-  if (canHover && !calm) {
+  if (moves) {
     window.addEventListener("mousemove", function (e) {
       mx = (e.clientX / window.innerWidth - 0.5) * 2;
       my = (e.clientY / window.innerHeight - 0.5) * 2;
@@ -361,7 +381,7 @@
     requestAnimationFrame(function () {
       var h = document.documentElement.scrollHeight - window.innerHeight;
       bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
-      if (window.scrollY < window.innerHeight) applyParallax(mx, my);
+      if (moves && window.scrollY < window.innerHeight) applyParallax(mx, my);
       ticking = false;
     });
   }, { passive: true });
@@ -409,8 +429,8 @@
   }
 
   /* ══════════ კითხვები ══════════ */
-  var NO_LABELS = ["არა", "ნამდვილად?", "დაფიქრდი ", "სერიოზულად?",
-    "ეს ღილაკი გატეხილია", "კარგი, კი "];
+  var NO_LABELS = ["არა", "ნამდვილად?", "დაფიქრდი", "სერიოზულად?",
+    "ეს ღილაკი გატეხილია", "კარგი, კი"];
   var no1 = $("#no1"), yes1 = $("#yes1"), hint1 = $("#hint1"), tries = 0;
 
   function dodge() {

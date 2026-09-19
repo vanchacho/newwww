@@ -34,6 +34,8 @@
 
 *,*::before,*::after{box-sizing:border-box}
 
+button,a,input,[role="button"]{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
 html{scroll-behavior:smooth}
 
 body{
@@ -404,18 +406,28 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   text-shadow:0 0 34px color-mix(in srgb,var(--rose) 40%,transparent);
   animation:beat 2.4s ease-in-out infinite;
 }
+/* თითისთვის მოსაჭიდი ზონა 30px-ია, ხილული ზოლი კი ისევ თხელი */
 .meter__range{
-  -webkit-appearance:none;appearance:none;width:100%;height:5px;
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:30px;background:transparent;
+  outline:none;cursor:grab;touch-action:pan-y;
+}
+.meter__range::-webkit-slider-runnable-track{
+  height:5px;border-radius:99px;
   background:linear-gradient(90deg,var(--rose) var(--fill,100%),var(--rose-lt) var(--fill,100%));
-  border-radius:99px;outline:none;cursor:grab;
 }
 .meter__range::-webkit-slider-thumb{
   -webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+  margin-top:-10.5px;
   background:var(--rose);border:4px solid var(--card);cursor:grab;
   box-shadow:0 4px 16px -2px rgba(184,81,95,.7);
   transition:transform .3s;
 }
 .meter__range::-webkit-slider-thumb:hover{transform:scale(1.18)}
+.meter__range::-moz-range-track{
+  height:5px;border-radius:99px;
+  background:linear-gradient(90deg,var(--rose) var(--fill,100%),var(--rose-lt) var(--fill,100%));
+}
 .meter__range::-moz-range-thumb{
   width:22px;height:22px;border-radius:50%;background:var(--rose);
   border:4px solid var(--card);cursor:grab;
@@ -472,13 +484,16 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   animation:envFloat 5s ease-in-out infinite;
 }
 .env__body,.env__flap,.env__note{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s}
-/* გადატარებაზე ფარვალი ოდნავ იწევს — მიწვევა, რომ დააჭირო */
-.env:hover .env__body,.env:focus-visible .env__body{
-  transform:scale(1.015);
-  box-shadow:0 38px 80px -34px rgba(94,45,60,.55),inset 0 1px 0 rgba(255,255,255,.55);
+/* გადატარებაზე ფარვალი ოდნავ იწევს — მიწვევა, რომ დააჭირო (მხოლოდ მაუსზე) */
+@media (hover:hover){
+  .env:hover .env__body{
+    transform:scale(1.015);
+    box-shadow:0 38px 80px -34px rgba(94,45,60,.55),inset 0 1px 0 rgba(255,255,255,.55);
+  }
+  .env:hover .env__flap{transform:rotateX(-16deg)}
 }
-.env:hover .env__flap,.env:focus-visible .env__flap{transform:rotateX(-16deg)}
-.env:focus-visible .env__body{border-color:var(--rose)}
+.env:focus-visible .env__body{transform:scale(1.015);border-color:var(--rose)}
+.env:focus-visible .env__flap{transform:rotateX(-16deg)}
 .env:active .env__body{transform:scale(.99)}
 .env__body{
   position:absolute;inset:0;border-radius:12px;overflow:hidden;
@@ -689,6 +704,11 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   100%{opacity:0;transform:translate(var(--dx,20px),-112vh) rotate(var(--rot,220deg)) scale(1.1)}
 }
 @keyframes blink{50%{opacity:0}}
+/* მხოლოდ transform — ბლიურს ხელახლა არ ხატავს, ამიტომ არ ეზარება */
+@keyframes blobDrift{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(4vw,-3vw,0) scale(1.07)}
+}
 @keyframes envFloat{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-8px)}
@@ -745,10 +765,34 @@ section{position:relative;padding:clamp(80px,13vh,150px) clamp(20px,6vw,80px)}
   .hcard--b{right:-2%;top:24%;width:104px}
   .diptych__txt{margin-top:26px}
 }
+/* ─────────────  ტელეფონი: მსუბუქად და უხტუნიად  ─────────────
+   სიგანის გარდა შეხებით მართვად ეკრანსაც ვიჭერთ — ტაბლეტიც მოყვება */
+@media (max-width:760px),(hover:none){
+  /* ლაქების ზომა vh-ზე იყო მიბმული: ბრაუზერის ზოლის აცურებაზე
+     იცვლებოდა და გვერდი ხტუნავდა. ახლა მხოლოდ სიგანეზეა. */
+  .blob{
+    aspect-ratio:auto;filter:blur(40px);opacity:.5;
+    animation:blobDrift 24s ease-in-out infinite;
+    will-change:transform;
+  }
+  .blob--1{width:96vw;height:96vw;left:-32vw;top:-20vw}
+  .blob--2{width:84vw;height:84vw;right:-30vw;top:34vw;animation-duration:30s}
+  .blob--3{width:76vw;height:76vw;left:12vw;bottom:-30vw;animation-duration:27s}
+
+  /* backdrop-filter ყოველ კადრზე ფონს იღებდა — სქროლვას ამძიმებდა */
+  .pill{backdrop-filter:none;background:var(--card);padding:11px 16px}
+  .pill--icon{padding:11px 14px;min-width:42px;justify-content:center}
+
+  .shot__img img,.diptych__pics img{transition-duration:1s}
+  .joke:hover{transform:none}
+}
+
 @media (max-width:560px){
   body{line-height:1.7}
   .hero{padding:96px 18px 56px}
-  .hcard{opacity:.55!important}
+  .hcard{opacity:.5!important;width:92px;padding:5px 5px 18px}
+  .hcard--a{left:4%;top:9%}
+  .hcard--b{right:4%;top:auto;bottom:13%}
   .marquee__row img{height:132px;width:104px}
   .marquee__row figure{width:104px}
   .diptych__pics{grid-template-columns:1fr}
